@@ -1,0 +1,7 @@
+:root {
+    --background-primary-color: hsl(240, 1%, 15%);
+
+    --text-primary-color: hsl(0, 0%, 100%);
+    --text-secondary-color-light: hsl(10, 80%, 50%);
+    --text-secondary-color-dark: hsl(10, 60%, 30%);
+}

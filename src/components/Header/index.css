@@ -1,0 +1,29 @@
+header.desktop-header {
+    margin: 0 auto;
+}
+
+header.desktop-header > h1,
+header.desktop-header > h2 {
+    margin: 0;
+}
+
+header.desktop-header > h1 {
+    padding-top: 2rem;
+    color: var(--text-secondary-color-light);
+}
+
+header.desktop-header > h1::before {
+    content: '{ ';
+    font-size: larger;
+    color: var(--text-secondary-color-dark);
+}
+
+header.desktop-header > h1::after {
+    content: ' }';
+    font-size: larger;
+    color: var(--text-secondary-color-dark);
+}
+
+header.desktop-header > h2 {
+    color: var(--text-secondary-color-dark);
+}
