@@ -3,7 +3,7 @@ import './index.css'
 
 const Footer: FC = () => (
     <footer>
-        &#169; 2021 Jana Chaloupková
+        <small>&#169; 2021 Jana Chaloupková</small>
     </footer>
 )
 
