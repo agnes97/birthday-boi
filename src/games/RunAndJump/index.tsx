@@ -3,8 +3,10 @@ import './index.css'
 import Obstacles from './obstacles'
  
 const animationTime = 300 // milliseconds
-const animationType = 'ease-in-out'
+const animationType = 'ease'
 const jumpHeight = 5 // rem
+
+const age = 29 // number of obstacles
 
 const RunAndJump: FC = () => {
     const [isJumping, setIsJumping] = useState<boolean>(false)
@@ -44,7 +46,7 @@ const RunAndJump: FC = () => {
     return (
         <section className='game-box'>
             <div ref={ballRef} className='ball' />
-            <Obstacles />
+            <Obstacles age={age} />
         </section>
     )
 }
