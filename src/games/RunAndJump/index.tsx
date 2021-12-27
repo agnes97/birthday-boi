@@ -2,52 +2,42 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
  
 const RunAndJump: FC = () => {
-    const [isJumping, setIsJumping] = useState<boolean>(false)
     const [position, setPosition] = useState<number>(0)
-    const positionRef = useRef(position)
+
+    const ballRef = useRef<HTMLDivElement>(null)
 
     // CONTROL JUMPING
     const jump = useCallback(() => {
-        const ball = document.querySelector<HTMLElement>('.ball')
+        const ball = ballRef.current
 
-        let timerId = setInterval(() => {
-            if (positionRef.current === 3) { // move down
-                console.log("down")
-                clearInterval(timerId) 
-                setPosition(positionRef.current = 0)
-                ball ? ball.style.bottom = positionRef.current + 'rem' : console.log('nothing here')
-                setIsJumping(false)
+        if (!ball) return
 
-            } else if (position === 0) { // move up
-                clearInterval(timerId) 
+        if (position === 0) { // move up
+            console.log("up")
+            setPosition(3)
+            ball.style.bottom = '3rem'
+        }
 
-                let upTimerId = setInterval(() => {
-                    console.log("up")
-                    setPosition(positionRef.current = 3)
-                    ball ? ball.style.bottom = positionRef.current + 'rem' : console.log('nothing here')
-                    clearInterval(upTimerId)
-                    setIsJumping(true)
-                }, 20)
-            }
-        }, 20)
-    }, [position])
+        if (position === 3) { // move down
+            console.log("down")
+            setPosition(0)
+            ball.style.bottom = '0rem'
+        }
+    }, [ballRef, position, setPosition])
 
     // CONTROL GAME WITH SPACE KEY
     const controlGame = useCallback((event) => {
-        if (event.keyCode === 32) {
-            if (!isJumping) {
-                jump()
-            }
-        }
-    }, [isJumping, jump])
+        if (event.keyCode === 32) jump()
+    }, [jump])
 
     useEffect(() => {
         document.addEventListener('keyup', controlGame)
-    }, [controlGame, position])
+        return () => document.removeEventListener('keyup', controlGame)
+    }, [controlGame])
 
     return (
         <section className='game-box'>
-            <div className='ball' />
+            <div ref={ballRef} className='ball' />
         </section>
     )
 }
