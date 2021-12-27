@@ -4,7 +4,11 @@ import './index.css'
 const movingTime = 3000 // milliseconds
 const animationType = 'linear'
 
-const maxIntevalBetweenObstacles = 1000 // milliseconds
+const minIntevalBetweenObstacles = 750  // milliseconds
+const maxIntevalBetweenObstacles = 1500 // milliseconds
+
+const timeToNextObstacle = () =>
+  Math.floor(Math.random() * (maxIntevalBetweenObstacles - minIntevalBetweenObstacles + 1)) + minIntevalBetweenObstacles
 
 const Obstacles: FC<{ age: number }> = ({ age }) => {
     const obstacleRefs = useRef<Array<HTMLDivElement | null>>([])
@@ -20,7 +24,7 @@ const Obstacles: FC<{ age: number }> = ({ age }) => {
             obstacle.style.right = '100%'
         }
 
-        setTimeout(() => moveNextObstacle(obstaclesIterator), maxIntevalBetweenObstacles)
+        setTimeout(() => moveNextObstacle(obstaclesIterator), timeToNextObstacle())
     }, [])
 
     useEffect(() => moveNextObstacle(obstacleRefs.current.values()), [moveNextObstacle])
