@@ -4,6 +4,7 @@ import Obstacles from './obstacles'
  
 const animationTime = 300 // milliseconds
 const animationType = 'ease'
+
 const jumpHeight = 5 // rem
 
 const age = 29 // number of obstacles
@@ -31,7 +32,7 @@ const RunAndJump: FC = () => {
 
         // wait for animation
         setTimeout(() => setIsJumping(false), animationTime * 2)
-    }, [ballRef, isJumping, setIsJumping])
+    }, [isJumping, setIsJumping])
 
     // CONTROL GAME WITH SPACE KEY
     const controlGame = useCallback((event) => {
@@ -39,8 +40,8 @@ const RunAndJump: FC = () => {
     }, [jump])
 
     useEffect(() => {
-        document.addEventListener('keyup', controlGame)
-        return () => document.removeEventListener('keyup', controlGame)
+        document.addEventListener('keydown', controlGame)
+        return () => document.removeEventListener('keydown', controlGame)
     }, [controlGame])
 
     return (
