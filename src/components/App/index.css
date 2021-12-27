@@ -2,9 +2,9 @@ div.page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: column wrap;
-  width: inherit;
-  height: 100vh;
+  flex-flow: column;
+  width: 100vw;
+  min-height: 100vh;
   margin: 0 auto;
   text-align: center;
   padding: 1.5rem 0;
@@ -12,6 +12,6 @@ div.page-wrapper {
 
 main {
   flex-grow: 1;
-  width: 100%;
+  width: inherit;
   padding: 1.5rem 0;
 }
