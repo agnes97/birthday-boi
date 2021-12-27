@@ -13,9 +13,11 @@ section.game-box {
 section.game-box > .ball {
     position: absolute;
     bottom: 0;
-    width: 1.5rem;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    background-color: var(--text-secondary-color-dark);
-    border: 0.1rem solid var(--text-primary-color);
+    height: 5rem;
+    width: 4rem;
+    background-image: url('../../assets/running.gif');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    margin: -0.4rem;
 }
