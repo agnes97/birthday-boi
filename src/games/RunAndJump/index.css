@@ -1,5 +1,6 @@
 section.game-box {
     position: relative;
+    display: flex;
     max-width: 60%;
     aspect-ratio: 21 / 9;
     margin: 0 auto;

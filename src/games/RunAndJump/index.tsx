@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
+import Obstacles from './obstacles'
  
 const animationTime = 300 // milliseconds
 const animationType = 'ease-in-out'
@@ -43,6 +44,7 @@ const RunAndJump: FC = () => {
     return (
         <section className='game-box'>
             <div ref={ballRef} className='ball' />
+            <Obstacles />
         </section>
     )
 }
