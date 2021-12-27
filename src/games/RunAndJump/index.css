@@ -5,6 +5,7 @@ section.game-box {
     aspect-ratio: 21 / 9;
     margin: 0 auto;
     border: 0.15rem solid var(--background-secondary-color-light);
+    overflow: hidden;
 }
 
 /* TODO: Style .game-box for mobile! */

@@ -1,6 +1,7 @@
 section.game-box > .obstacle {
-    align-self: self-end;
-    margin: 0 auto;
+    position: absolute;
+    right: -1.5rem;
+    bottom: 0;
     width: 1.5rem;
     height: 1.5rem;
     background-color: blue;
