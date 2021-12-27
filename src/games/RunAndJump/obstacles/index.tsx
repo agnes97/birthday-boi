@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef } from 'react'
+import { Dispatch, FC, useCallback, useEffect, useRef } from 'react'
 import './index.css'
 
 const movingTime = 3000 // milliseconds
@@ -10,12 +10,22 @@ const maxIntevalBetweenObstacles = 1500 // milliseconds
 const timeToNextObstacle = () =>
   Math.floor(Math.random() * (maxIntevalBetweenObstacles - minIntevalBetweenObstacles + 1)) + minIntevalBetweenObstacles
 
-const Obstacles: FC<{ age: number }> = ({ age }) => {
+type Props = {
+    age: number,
+    setGameOver: Dispatch<boolean>
+}
+
+const Obstacles: FC<Props> = ({ age, setGameOver }) => {
     const obstacleRefs = useRef<Array<HTMLDivElement | null>>([])
 
     const moveNextObstacle = useCallback((obstaclesIterator: IterableIterator<HTMLDivElement | null>) => {
         const nextObstacle = obstaclesIterator.next()
-        if (nextObstacle.done) return // last obstacle
+
+        // last obstacle
+        if (nextObstacle.done) {
+            setTimeout(() => setGameOver(true), movingTime)
+            return
+        }
 
         const obstacle = nextObstacle.value
 
@@ -25,7 +35,7 @@ const Obstacles: FC<{ age: number }> = ({ age }) => {
         }
 
         setTimeout(() => moveNextObstacle(obstaclesIterator), timeToNextObstacle())
-    }, [])
+    }, [setGameOver])
 
     useEffect(() => moveNextObstacle(obstacleRefs.current.values()), [moveNextObstacle])
 

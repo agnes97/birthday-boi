@@ -1,16 +1,18 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
-import Obstacles from './obstacles'
+import GameOver from './GameOver'
+import Obstacles from './Obstacles'
  
 const animationTime = 300 // milliseconds
 const animationType = 'ease'
 
 const jumpHeight = 5 // rem
 
-const age = 29 // number of obstacles
+const age = 1 // number of obstacles
 
 const RunAndJump: FC = () => {
     const [isJumping, setIsJumping] = useState<boolean>(false)
+    const [gameOver, setGameOver] = useState<boolean>(false)
 
     const ballRef = useRef<HTMLDivElement>(null)
 
@@ -46,8 +48,13 @@ const RunAndJump: FC = () => {
 
     return (
         <section className='game-box'>
-            <div ref={ballRef} className='ball' />
-            <Obstacles age={age} />
+            {gameOver
+                ? <GameOver setGameOver={setGameOver}/>
+                : <>
+                    <div ref={ballRef} className='ball' />
+                    <Obstacles age={age} setGameOver={setGameOver} />
+                </>
+            }
         </section>
     )
 }
