@@ -1,8 +1,12 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
  
+const animationTime = 300 // milliseconds
+const animationType = 'ease-in-out'
+const jumpHeight = 5 // rem
+
 const RunAndJump: FC = () => {
-    const [position, setPosition] = useState<number>(0)
+    const [isJumping, setIsJumping] = useState<boolean>(false)
 
     const ballRef = useRef<HTMLDivElement>(null)
 
@@ -10,20 +14,21 @@ const RunAndJump: FC = () => {
     const jump = useCallback(() => {
         const ball = ballRef.current
 
-        if (!ball) return
+        if (!ball || isJumping) return
 
-        if (position === 0) { // move up
-            console.log("up")
-            setPosition(3)
-            ball.style.bottom = '3rem'
-        }
+        // set animation
+        ball.style.transition = `bottom ${animationTime}ms ${animationType}`
 
-        if (position === 3) { // move down
-            console.log("down")
-            setPosition(0)
-            ball.style.bottom = '0rem'
-        }
-    }, [ballRef, position, setPosition])
+        // move up
+        setIsJumping(true)
+        ball.style.bottom = `${jumpHeight}rem`
+
+        // move down
+        setTimeout(() => ball.style.bottom = '0rem', animationTime)
+
+        // wait for animation
+        setTimeout(() => setIsJumping(false), animationTime * 2)
+    }, [ballRef, isJumping, setIsJumping])
 
     // CONTROL GAME WITH SPACE KEY
     const controlGame = useCallback((event) => {
