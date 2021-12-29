@@ -3,9 +3,16 @@ section.game-box > .hero {
     bottom: 2rem;
     height: 4rem;
     width: 2.5rem;
-    background-image: url('../../../../assets/henry.gif');
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: contain;
     cursor: pointer;
+}
+
+section.game-box > .agnes {
+    background-image: url('../../../../assets/agnes.gif');
+}
+
+section.game-box > .henry {
+    background-image: url('../../../../assets/henry.gif');
 }
