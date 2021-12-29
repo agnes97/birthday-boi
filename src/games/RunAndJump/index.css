@@ -4,20 +4,20 @@ section.game-box {
     max-width: 60%;
     aspect-ratio: 21 / 9;
     margin: 0 auto;
-    border: 0.15rem solid var(--background-secondary-color-light);
     overflow: hidden;
+    background-color: hsl(225, 80%, 78%);
+    outline: 0.2rem solid white;
+    padding: 0.1rem;
+    border-bottom: 2rem solid hsl(120, 50%, 45%);
 }
 
-/* TODO: Style .game-box for mobile! */
-
-section.game-box > .ball {
+section.game-box > .hero {
     position: absolute;
     bottom: 0;
-    height: 5rem;
-    width: 4rem;
+    height: 4rem;
+    width: 2.5rem;
     background-image: url('../../assets/running.gif');
     background-repeat: no-repeat;
     background-position: bottom;
-    background-size: cover;
-    margin: -0.4rem;
+    background-size: contain;
 }

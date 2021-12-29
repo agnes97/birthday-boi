@@ -1,14 +1,14 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
-import GameOver from './GameOver'
-import Obstacles from './Obstacles'
+import GameOver from './components/GameOver'
+import Obstacles from './components/Obstacles'
  
 const animationTime = 300 // milliseconds
 const animationType = 'ease'
 
-const jumpHeight = 5 // rem
+const jumpHeight = 10 // rem
 
-const age = 1 // number of obstacles
+const age = 10 // number of obstacles
 
 const RunAndJump: FC = () => {
     const [isJumping, setIsJumping] = useState<boolean>(false)
@@ -18,19 +18,19 @@ const RunAndJump: FC = () => {
 
     // CONTROL JUMPING
     const jump = useCallback(() => {
-        const ball = ballRef.current
+        const hero = ballRef.current
 
-        if (!ball || isJumping) return
+        if (!hero || isJumping) return
 
         // set animation
-        ball.style.transition = `bottom ${animationTime}ms ${animationType}`
+        hero.style.transition = `bottom ${animationTime}ms ${animationType}`
 
         // move up
         setIsJumping(true)
-        ball.style.bottom = `${jumpHeight}rem`
+        hero.style.bottom = `${jumpHeight}rem`
 
         // move down
-        setTimeout(() => ball.style.bottom = '0rem', animationTime)
+        setTimeout(() => hero.style.bottom = '0rem', animationTime)
 
         // wait for animation
         setTimeout(() => setIsJumping(false), animationTime * 2)
@@ -51,7 +51,7 @@ const RunAndJump: FC = () => {
             {gameOver
                 ? <GameOver setGameOver={setGameOver}/>
                 : <>
-                    <div ref={ballRef} className='ball' />
+                    <div ref={ballRef} className='hero' />
                     <Obstacles age={age} setGameOver={setGameOver} />
                 </>
             }

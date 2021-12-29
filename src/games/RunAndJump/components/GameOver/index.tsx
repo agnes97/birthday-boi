@@ -15,7 +15,7 @@ const GameOver: FC<Props> = ({ setGameOver }) => {
     return (
         <div className='game-over'>
             <h2>{title}</h2>
-            <button onClick={handleClick}>REPLAY</button>
+            <button onClick={handleClick} title="REPLAY GAME">&#x21BB;</button>
         </div>
     )
 }

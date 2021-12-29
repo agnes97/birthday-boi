@@ -23,6 +23,7 @@ const Obstacles: FC<Props> = ({ age, setGameOver }) => {
 
         // last obstacle
         if (nextObstacle.done) {
+            // TODO: BUG: Game sometimes doesn't end!
             setTimeout(() => setGameOver(true), movingTime)
             return
         }
@@ -31,7 +32,7 @@ const Obstacles: FC<Props> = ({ age, setGameOver }) => {
 
         if (obstacle) {
             obstacle.style.transition = `right ${movingTime}ms ${animationType}`
-            obstacle.style.right = '100%'
+            obstacle.style.right = '110%'
         }
 
         setTimeout(() => moveNextObstacle(obstaclesIterator), timeToNextObstacle())
@@ -44,12 +45,16 @@ const Obstacles: FC<Props> = ({ age, setGameOver }) => {
     return (
         <>
             {years.map((year) => 
-                <div 
-                    key={year}
-                    ref={(element) => obstacleRefs.current.push(element)}
-                    className='obstacle'>
+            <div 
+                className='obstacle'
+                key={year}
+                ref={(element) => obstacleRefs.current.push(element)}
+            >
+                <div className='obstacle-flame' />
+                <div className='obstacle-number'>
                         {year}
                 </div>
+            </div>
             )}
         </>
     )
