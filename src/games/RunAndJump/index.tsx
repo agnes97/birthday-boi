@@ -31,7 +31,7 @@ const RunAndJump: FC = () => {
         hero.style.bottom = `${jumpHeight}rem`
 
         // move down
-        setTimeout(() => hero.style.bottom = '0rem', animationTime)
+        setTimeout(() => hero.style.bottom = '2rem', animationTime)
 
         // wait for animation
         setTimeout(() => setIsJumping(false), animationTime * 2)
@@ -54,6 +54,7 @@ const RunAndJump: FC = () => {
                 : <>
                     <Hero heroRef={heroRef} />
                     <Obstacles age={age} setGameOver={setGameOver} />
+                    <div className='grass' />
                 </>
             }
         </section>

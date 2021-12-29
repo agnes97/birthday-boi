@@ -6,7 +6,7 @@ section.game-box > .obstacle {
     place-items: center;
     /* Starting position needs to be this big to accomodate higher numbers. */
     right: -3rem;
-    bottom: 0;
+    bottom: 2rem;
 }
 
 section.game-box > .obstacle > .obstacle-number {
