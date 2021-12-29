@@ -1,11 +1,11 @@
-import { FC } from 'react'
+import { FC, RefObject } from 'react'
 import './index.css'
 
 import heroHenry from '../../../../assets/henry.gif'
 import heroAgnes from '../../../../assets/agnes.gif'
 
 type Props = {
-    heroRef: any
+    heroRef: RefObject<HTMLDivElement>  
 }
 
 const Hero: FC<Props> = ({ heroRef }) => {
@@ -25,7 +25,7 @@ const Hero: FC<Props> = ({ heroRef }) => {
     }
 
     return (
-        <div ref={heroRef} className='hero henry' onClick={handleClick}/>
+        <div ref={heroRef} className='hero henry' onClick={handleClick} />
     )
 }
 
