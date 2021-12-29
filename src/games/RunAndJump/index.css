@@ -7,17 +7,6 @@ section.game-box {
     overflow: hidden;
     background-color: hsl(225, 80%, 78%);
     outline: 0.2rem solid white;
-    padding: 0.1rem;
+    padding: 1rem;
     border-bottom: 2rem solid hsl(120, 50%, 45%);
-}
-
-section.game-box > .hero {
-    position: absolute;
-    bottom: 0;
-    height: 4rem;
-    width: 2.5rem;
-    background-image: url('../../assets/running.gif');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: contain;
 }

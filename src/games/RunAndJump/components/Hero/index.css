@@ -1,0 +1,11 @@
+section.game-box > .hero {
+    position: absolute;
+    bottom: 0;
+    height: 4rem;
+    width: 2.5rem;
+    background-image: url('../../../../assets/henry.gif');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+    cursor: pointer;
+}

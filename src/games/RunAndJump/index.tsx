@@ -2,6 +2,7 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
 import GameOver from './components/GameOver'
 import Obstacles from './components/Obstacles'
+import Hero from './components/Hero'
  
 const animationTime = 300 // milliseconds
 const animationType = 'ease'
@@ -14,11 +15,11 @@ const RunAndJump: FC = () => {
     const [isJumping, setIsJumping] = useState<boolean>(false)
     const [gameOver, setGameOver] = useState<boolean>(false)
 
-    const ballRef = useRef<HTMLDivElement>(null)
+    const heroRef = useRef<HTMLDivElement>(null)
 
     // CONTROL JUMPING
     const jump = useCallback(() => {
-        const hero = ballRef.current
+        const hero = heroRef.current
 
         if (!hero || isJumping) return
 
@@ -51,7 +52,7 @@ const RunAndJump: FC = () => {
             {gameOver
                 ? <GameOver setGameOver={setGameOver}/>
                 : <>
-                    <div ref={ballRef} className='hero' />
+                    <Hero heroRef={heroRef} />
                     <Obstacles age={age} setGameOver={setGameOver} />
                 </>
             }
