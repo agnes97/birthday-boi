@@ -53,7 +53,7 @@ const RunAndJump: FC = () => {
                 ? <GameOver setGameOver={setGameOver}/>
                 : <>
                     <Hero heroRef={heroRef} />
-                    <Obstacles age={age} setGameOver={setGameOver} />
+                    <Obstacles age={age} setGameOver={setGameOver} heroRef={heroRef} />
                     <div className='grass' />
                 </>
             }
