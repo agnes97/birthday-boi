@@ -48,7 +48,9 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused = false, onLastObstacl
 
         // last obstacle
         if (nextObstacle.done || obstacle === null) {
-            return void setTimeout(() => onLastObstacle(), obstaclesMovingTime)
+            return nextObstacleTimeoutRef.current = window.setTimeout(
+                () => onLastObstacle(), obstaclesMovingTime
+            )
         }
 
         obstacle.style.transition = `right ${obstaclesMovingTime}ms ${obstaclesAnimationType}`
