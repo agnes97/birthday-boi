@@ -22,7 +22,7 @@ section.game-box > .start-screen-container > button {
     border-radius: 50%;
     aspect-ratio: 1 / 1;
     transition: transform 1s linear;
-    background-color: hsl(120, 50%, 45%);
+    background-color: hsl(224, 50%, 45%);
 }
 
 

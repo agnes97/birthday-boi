@@ -62,6 +62,7 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, isGameRunning, onLast
 
     useEffect(() => {
         if (!paused && isGameRunning) {
+            // TODO: Add counting (3, 2, 1) before start in the background!
             setTimeout(() => moveNextObstacle(obstacleRefs.current.values()), 1800)
         }
     }, [paused, moveNextObstacle, isGameRunning])

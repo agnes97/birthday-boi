@@ -20,27 +20,35 @@ section.game-box > .game-state-container > h2 {
     margin-bottom: 1rem;
 }
 
+section.game-box > .game-state-container > .button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
 /* TODO: Create re-usable button component with optional animation! */
-section.game-box > .game-state-container > button {
+section.game-box > .game-state-container * button {
     border: 0.1rem solid hsl(0, 0%, 100%);
     color: hsl(0, 0%, 100%);
     padding: 0.5rem;
     font-weight: bold;
     font-size: 1.5rem;
     border-radius: 50%;
+    min-width: 3rem;
     aspect-ratio: 1 / 1;
     transition: transform 1s linear;
+    line-height: 0;
 }
 
-section.game-box > .game-state-container.game-won > button {
+section.game-box > .game-state-container.game-won * button {
     background-color: hsl(120, 50%, 45%);
 }
 
-section.game-box > .game-state-container.game-lost > button {
+section.game-box > .game-state-container.game-lost * button {
     background-color: hsl(0deg 50% 45%);
 }
 
-section.game-box > .game-state-container > button:hover {
+section.game-box > .game-state-container * button:hover {
     background-color: white;
     border: 0.1rem solid hsl(0, 0%, 0%);
     color: hsl(0, 0%, 0%);

@@ -43,7 +43,15 @@ const Hero: FC<Props> = ({ heroRef, isGameRunning }) => {
         
         hero.style.transition = 'left 3s ease'
         hero.style.left = `${heroStartingPosition}rem`
+    }, [heroRef, isJumping])
+    
+    const hideHero = useCallback(() => {
+        const hero = heroRef.current
 
+        if (!hero || isJumping) return
+
+        // TODO: Fix hero going backwards lol! 
+        hero.style.left = `-${heroStartingPosition}rem`
     }, [heroRef, isJumping])
 
     const controlHero = useCallback((event) => {
@@ -52,10 +60,11 @@ const Hero: FC<Props> = ({ heroRef, isGameRunning }) => {
 
     useEffect(() => {
         if (isGameRunning) moveToStarterPosition()
+        if (!isGameRunning) hideHero()
         
         document.addEventListener('keydown', controlHero)
         return () => document.removeEventListener('keydown', controlHero)
-    }, [controlHero, isGameRunning, moveToStarterPosition])
+    }, [controlHero, hideHero, isGameRunning, moveToStarterPosition])
 
     // TODO: Add "change hero" button to starting screen!
     const handleClick = () => setHero(hero === 'agnes' ? 'henry' : 'agnes')

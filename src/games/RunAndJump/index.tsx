@@ -24,12 +24,18 @@ const RunAndJump: FC = () => {
         setGameWon(gameWonValue)
     }, [])
 
+    const returnToMenu = useCallback(() => {
+        setGameRunning(false)
+        resetGame(false, false)
+    }, [resetGame])
+
     return (
         <section className='game-box'>
             {(!gameRunning && !gameOver) && <StartScreen startGame={() => startGame()}/>}
             {(gameOver || gameWon) && <GameState 
                 onGameReset={() => resetGame(false, false)} 
                 gameWon={gameWon}
+                returnToMenu={() => returnToMenu()}
             />}
             <Hero heroRef={heroRef} isGameRunning={gameRunning} />
             <Obstacles
@@ -42,7 +48,7 @@ const RunAndJump: FC = () => {
                     return heroBoundaries ? areBoundariesInCollision(heroBoundaries, obstacleBoundaries, 5) : false
                 }}
                 onObstacleCollision={() => setGameOver(true)} />
-            <div className={`grass ${(gameOver && !gameWon) && 'game-over'}`} />
+            <div className={`grass ${(gameOver && !gameWon) && 'game-over'} ${!gameRunning && 'start-screen'}`} />
         </section>
     )
 }
