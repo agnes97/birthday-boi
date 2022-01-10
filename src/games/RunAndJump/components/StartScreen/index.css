@@ -10,23 +10,63 @@ section.game-box > .start-screen-container > h2 {
     font-size: 3rem;
     margin-top: 0;
     margin-bottom: 1rem;
+    margin: 1.5rem 0;
+}
+
+section.game-box > .start-screen-container > .options-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin-bottom: 4rem;
+}
+
+section.game-box > .start-screen-container > .options-container > .option {
+    padding: 1.5rem;
+    border: 0.1rem dashed hsl(224, 50%, 45%);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+section.game-box > .start-screen-container > .options-container > .option > hr {
+    border: none;
+    width: 0.1rem;
+    height: 100%;
+    background-color: hsl(224, 50%, 45%);
+}
+
+section.game-box > .start-screen-container > .options-container > .option > img {
+    padding: 1rem;
+    cursor: pointer;
+} 
+
+section.game-box > .start-screen-container > .options-container > .option > img:hover {
+    background-color: hsl(224, 50%, 45%);
 }
 
 /* TODO: Create re-usable button component with optional animation! */
-section.game-box > .start-screen-container > button {
+section.game-box > .start-screen-container * button {
     border: 0.1rem solid hsl(0, 0%, 100%);
     color: hsl(0, 0%, 100%);
     padding: 0.5rem;
     font-weight: bold;
     font-size: 1.5rem;
     border-radius: 50%;
+    min-width: 3rem;
     aspect-ratio: 1 / 1;
     transition: transform 1s linear;
     background-color: hsl(224, 50%, 45%);
+    line-height: 0;
 }
 
 
-section.game-box > .start-screen-container > button:hover {
+section.game-box > .start-screen-container * button:hover {
     background-color: white;
     border: 0.1rem solid hsl(0, 0%, 0%);
     color: hsl(0, 0%, 0%);
