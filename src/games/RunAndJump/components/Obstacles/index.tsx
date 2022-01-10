@@ -16,10 +16,10 @@ type Props = {
     onLastObstacle: () => void,
     isObstacleInCollision?: (obstacleBoundaries: DOMRect) => boolean,
     onObstacleCollision?: () => void,
-    isGameRunning: boolean
+    startDelay?: number, // milliseconds
 }
 
-const Obstacles: FC<Props> = ({ numberOfObstacles, paused, isGameRunning, onLastObstacle, isObstacleInCollision, onObstacleCollision }) => {
+const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObstacleInCollision, onObstacleCollision, startDelay }) => {
     const obstacleRefs = useRef<Array<HTMLDivElement | null>>([])
 
     const nextObstacleTimeoutRef = useRef<number>()
@@ -61,11 +61,12 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, isGameRunning, onLast
     }, [onLastObstacle])
 
     useEffect(() => {
-        if (!paused && isGameRunning) {
+        if (!paused) {
             // TODO: Add counting (3, 2, 1) before start in the background!
-            setTimeout(() => moveNextObstacle(obstacleRefs.current.values()), 1800)
+            const startObstacleMovement = () => moveNextObstacle(obstacleRefs.current.values())
+            startDelay ? setTimeout(startObstacleMovement, startDelay) : startObstacleMovement()
         }
-    }, [paused, moveNextObstacle, isGameRunning])
+    }, [paused, moveNextObstacle, startDelay])
 
     const detectCollision = useCallback(() => {
         if (!isObstacleInCollision) return

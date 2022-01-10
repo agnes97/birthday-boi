@@ -10,10 +10,11 @@ const jumpHeight = baseLevel + 8 // rem
 
 type Props = {
     heroRef: RefObject<HTMLDivElement>,
-    isGameRunning: boolean
+    isPresent: boolean,
+    arrivalDelay: number, // milliseconds
 }
 
-const Hero: FC<Props> = ({ heroRef, isGameRunning }) => {
+const Hero: FC<Props> = ({ heroRef, isPresent, arrivalDelay }) => {
     const [hero, setHero] = useState('henry')
     const [isJumping, setIsJumping] = useState<boolean>(false)
 
@@ -40,17 +41,18 @@ const Hero: FC<Props> = ({ heroRef, isGameRunning }) => {
         const hero = heroRef.current
 
         if (!hero || isJumping) return
-        
-        hero.style.transition = 'left 3s ease'
+
+        hero.style.transform = 'scaleX(1)'
+        hero.style.transition = `left ${arrivalDelay}ms ease`
         hero.style.left = `${heroStartingPosition}rem`
-    }, [heroRef, isJumping])
+    }, [heroRef, isJumping, arrivalDelay])
     
-    const hideHero = useCallback(() => {
+    const leave = useCallback(() => {
         const hero = heroRef.current
 
         if (!hero || isJumping) return
-
-        // TODO: Fix hero going backwards lol! 
+ 
+        hero.style.transform = 'scaleX(-1)'
         hero.style.left = `-${heroStartingPosition}rem`
     }, [heroRef, isJumping])
 
@@ -59,12 +61,12 @@ const Hero: FC<Props> = ({ heroRef, isGameRunning }) => {
     }, [jump])
 
     useEffect(() => {
-        if (isGameRunning) moveToStarterPosition()
-        if (!isGameRunning) hideHero()
+        if (isPresent) moveToStarterPosition()
+        if (!isPresent) leave()
         
         document.addEventListener('keydown', controlHero)
         return () => document.removeEventListener('keydown', controlHero)
-    }, [controlHero, hideHero, isGameRunning, moveToStarterPosition])
+    }, [controlHero, leave, isPresent, moveToStarterPosition])
 
     // TODO: Add "change hero" button to starting screen!
     const handleClick = () => setHero(hero === 'agnes' ? 'henry' : 'agnes')

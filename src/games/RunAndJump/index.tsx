@@ -6,7 +6,7 @@ import Hero from './components/Hero'
 import './index.css'
 import StartScreen from './components/StartScreen'
 
-const age = 10
+const age = 1
 
 const RunAndJump: FC = () => {
     const [gameRunning, setGameRunning] = useState<boolean>(false)
@@ -37,11 +37,11 @@ const RunAndJump: FC = () => {
                 gameWon={gameWon}
                 returnToMenu={() => returnToMenu()}
             />}
-            <Hero heroRef={heroRef} isGameRunning={gameRunning} />
+            <Hero heroRef={heroRef} isPresent={gameRunning && !gameOver} arrivalDelay={3000} />
             <Obstacles
                 numberOfObstacles={age}
-                paused={gameOver}
-                isGameRunning={gameRunning}
+                paused={gameOver || !gameRunning}
+                startDelay={1800}
                 onLastObstacle={() => resetGame(true, true)}
                 isObstacleInCollision={(obstacleBoundaries) => {
                     const heroBoundaries = heroRef.current?.getBoundingClientRect()
