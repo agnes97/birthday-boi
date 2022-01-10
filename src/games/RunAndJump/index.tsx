@@ -4,10 +4,12 @@ import GameState from './components/GameState'
 import Obstacles from './components/Obstacles'
 import Hero from './components/Hero'
 import './index.css'
+import StartScreen from './components/StartScreen'
 
-const age = 1
+const age = 10
 
 const RunAndJump: FC = () => {
+    const [gameRunning, setGameRunning] = useState<boolean>(false)
     const [gameOver, setGameOver] = useState<boolean>(false)
     const [gameWon, setGameWon] = useState<boolean>(false)
 
@@ -18,8 +20,15 @@ const RunAndJump: FC = () => {
         setGameWon(gameWonValue)
     }, [])
 
+    const startGame = useCallback(() => {
+        setGameRunning(true)
+    }, [])
+
+    console.log(gameRunning)
+
     return (
         <section className='game-box'>
+            {(!gameRunning && !gameOver) && <StartScreen startGame={() => startGame()}/>}
             {(gameOver || gameWon) && <GameState 
                 onGameReset={() => resetGame(false, false)} 
                 gameWon={gameWon}
@@ -28,6 +37,7 @@ const RunAndJump: FC = () => {
             <Obstacles
                 numberOfObstacles={age}
                 paused={gameOver}
+                isGameRunning={gameRunning}
                 onLastObstacle={() => resetGame(true, true)}
                 isObstacleInCollision={(obstacleBoundaries) => {
                     const heroBoundaries = heroRef.current?.getBoundingClientRect()
