@@ -15,16 +15,14 @@ const RunAndJump: FC = () => {
 
     const heroRef = useRef<HTMLDivElement>(null)
 
-    const resetGame = useCallback((gameOverValue: boolean, gameWonValue: boolean) => {
-        setGameOver(gameOverValue)
-        setGameWon(gameWonValue)
-    }, [])
-
     const startGame = useCallback(() => {
         setGameRunning(true)
     }, [])
 
-    console.log(gameRunning)
+    const resetGame = useCallback((gameOverValue: boolean, gameWonValue: boolean) => {
+        setGameOver(gameOverValue)
+        setGameWon(gameWonValue)
+    }, [])
 
     return (
         <section className='game-box'>
@@ -33,7 +31,7 @@ const RunAndJump: FC = () => {
                 onGameReset={() => resetGame(false, false)} 
                 gameWon={gameWon}
             />}
-            <Hero heroRef={heroRef} />
+            <Hero heroRef={heroRef} isGameRunning={gameRunning} />
             <Obstacles
                 numberOfObstacles={age}
                 paused={gameOver}

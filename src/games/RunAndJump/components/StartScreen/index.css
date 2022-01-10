@@ -4,7 +4,6 @@ section.game-box > .start-screen-container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(57, 129, 211, 0.5);
 }
 
 section.game-box > .start-screen-container > h2 {

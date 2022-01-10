@@ -61,7 +61,9 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, isGameRunning, onLast
     }, [onLastObstacle])
 
     useEffect(() => {
-        if (!paused && isGameRunning) moveNextObstacle(obstacleRefs.current.values())
+        if (!paused && isGameRunning) {
+            setTimeout(() => moveNextObstacle(obstacleRefs.current.values()), 1800)
+        }
     }, [paused, moveNextObstacle, isGameRunning])
 
     const detectCollision = useCallback(() => {

@@ -1,6 +1,7 @@
 section.game-box > .hero {
     position: absolute;
     bottom: 2rem;
+    left: -4rem;
     height: 4rem;
     width: 2.5rem;
     background-repeat: no-repeat;
