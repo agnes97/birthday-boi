@@ -16,3 +16,11 @@ section.game-box > .grass {
     height: 2rem;
     background-color: hsl(120, 50%, 45%);
 }
+
+section.game-box > .grass.game-over {
+    background-color: hsl(0, 50%, 45%);
+}
+
+section.game-box > .grass.start-screen {
+    background-color: hsl(224, 50%, 45%);
+}

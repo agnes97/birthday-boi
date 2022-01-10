@@ -42,7 +42,7 @@ const RunAndJump: FC = () => {
                     return heroBoundaries ? areBoundariesInCollision(heroBoundaries, obstacleBoundaries, 5) : false
                 }}
                 onObstacleCollision={() => setGameOver(true)} />
-            <div className='grass' />
+            <div className={`grass ${(gameOver && !gameWon) && 'game-over'}`} />
         </section>
     )
 }
