@@ -27,7 +27,6 @@ div.start-screen-container > form.form-wrapper {
 
 form.form-wrapper > .form-section {
     display: flex;
-    gap: 2rem;
     color: hsl(224, 50%, 45%);
     font-weight: bold;
 }
@@ -63,6 +62,7 @@ form.form-wrapper > .form-section.obstacles {
     justify-content: center;
     align-items: center;
     list-style: none;
+    gap: 2rem;
 }
 
 form.form-wrapper > .form-section.obstacles * label {
@@ -77,9 +77,14 @@ form.form-wrapper > .form-section.obstacles > div.fieldset-option {
 
 form.form-wrapper > .form-section.obstacles > div.fieldset-option:hover,
 form.form-wrapper > .form-section.hero > div.fieldset-option:hover {
-    background-color: hsl(224, 50%, 45%);
+    background-color: hsla(224, 50%, 45%, 0.5);
     color: hsl(0, 0%, 100%);
     cursor: pointer;
+}
+
+.imitate-hover {
+    background-color: hsl(224, 50%, 45%);
+    color: hsl(0, 0%, 100%);
 }
 
 /* SUBMIT */
@@ -87,6 +92,7 @@ form.form-wrapper > .form-section.submit {
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    gap: 2rem;
 }
 
 /* TODO: Create re-usable button component with optional animation! */

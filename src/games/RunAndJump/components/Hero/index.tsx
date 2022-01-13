@@ -12,10 +12,10 @@ type Props = {
     heroRef: RefObject<HTMLDivElement>,
     isPresent: boolean,
     arrivalDelay: number, // milliseconds
+    hero: string
 }
 
-const Hero: FC<Props> = ({ heroRef, isPresent, arrivalDelay }) => {
-    const [hero, setHero] = useState('henry')
+const Hero: FC<Props> = ({ heroRef, isPresent, arrivalDelay, hero }) => {
     const [isJumping, setIsJumping] = useState<boolean>(false)
 
     const jump = useCallback(() => {
@@ -68,10 +68,7 @@ const Hero: FC<Props> = ({ heroRef, isPresent, arrivalDelay }) => {
         return () => document.removeEventListener('keydown', controlHero)
     }, [controlHero, leave, isPresent, moveToStarterPosition])
 
-    // TODO: Add "change hero" button to starting screen!
-    const handleClick = () => setHero(hero === 'agnes' ? 'henry' : 'agnes')
-
-    return <div ref={heroRef} className={`hero ${hero}`} onClick={handleClick} />
+    return <div ref={heroRef} className={`hero ${hero}`} />
 }
 
 export default Hero

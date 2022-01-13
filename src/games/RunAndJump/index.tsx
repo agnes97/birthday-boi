@@ -1,20 +1,36 @@
-import { FC, useCallback, useRef, useState } from 'react'
+import { FC, useCallback, useReducer, useRef, useState } from 'react'
 import { areBoundariesInCollision } from '../../services/collision'
 import GameState from './components/GameState'
 import Obstacles from './components/Obstacles'
 import Hero from './components/Hero'
 import './index.css'
 import StartScreen from './components/StartScreen'
+import { getAge, hisBirthday } from '../../services/birthday'
 
-const age = 29
+export type GameData = {
+    hero?: string,
+    numberOfObstacles?: number
+}
+
+const initialNumberOfObstacles = () => getAge(hisBirthday)
 
 const RunAndJump: FC = () => {
     const [gameRunning, setGameRunning] = useState<boolean>(false)
     const [gameOver, setGameOver] = useState<boolean>(false)
     const [gameWon, setGameWon] = useState<boolean>(false)
-
+    
     const heroRef = useRef<HTMLDivElement>(null)
-
+    
+    // TODO: Remember last game as an initial state!
+    const initialGameState = { hero: 'henry', numberOfObstacles: initialNumberOfObstacles() }
+    const [gameData, setGameData] = useReducer(
+        (state: GameData, updates: GameData) => ({
+          ...state,
+          ...updates,
+        }),
+        initialGameState
+    )
+    
     const startGame = useCallback(() => {
         setGameRunning(true)
     }, [])
@@ -31,15 +47,25 @@ const RunAndJump: FC = () => {
 
     return (
         <section className='game-box'>
-            {(!gameRunning && !gameOver) && <StartScreen startGame={() => startGame()} age={age}/>}
+            {(!gameRunning && !gameOver) && <StartScreen 
+                startGame={() => startGame()}
+                gameData={gameData}
+                setGameData={setGameData}           
+            />}
             {(gameOver || gameWon) && <GameState 
                 onGameReset={() => resetGame(false, false)} 
                 gameWon={gameWon}
                 returnToMenu={() => returnToMenu()}
             />}
-            <Hero heroRef={heroRef} isPresent={gameRunning && !gameOver} arrivalDelay={3000} />
+            <Hero 
+                heroRef={heroRef} 
+                hero={gameData.hero ?? 'henry'}
+                isPresent={gameRunning && !gameOver} 
+                arrivalDelay={3000} 
+            />
             <Obstacles
-                numberOfObstacles={age}
+                // TODO: After implementing gameData, winning takes longer time!
+                numberOfObstacles={gameData.numberOfObstacles ?? 0}
                 paused={gameOver || !gameRunning}
                 startDelay={1800}
                 onLastObstacle={() => resetGame(true, true)}
