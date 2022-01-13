@@ -1,17 +1,15 @@
 div.page-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-flow: column;
-  width: 100vw;
-  min-height: 100vh;
-  margin: 0 auto;
+  max-width: 100vw;
+  height: 100vh;
   text-align: center;
-  padding: 1.5rem 0;
+  padding: 1.5rem;
+  place-content: space-between;
 }
 
 main {
-  flex-grow: 1;
   width: inherit;
+  height: inherit;
   padding: 1.5rem 0;
 }

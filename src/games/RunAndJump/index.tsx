@@ -6,7 +6,7 @@ import Hero from './components/Hero'
 import './index.css'
 import StartScreen from './components/StartScreen'
 
-const age = 1
+const age = 29
 
 const RunAndJump: FC = () => {
     const [gameRunning, setGameRunning] = useState<boolean>(false)
@@ -31,7 +31,7 @@ const RunAndJump: FC = () => {
 
     return (
         <section className='game-box'>
-            {(!gameRunning && !gameOver) && <StartScreen startGame={() => startGame()}/>}
+            {(!gameRunning && !gameOver) && <StartScreen startGame={() => startGame()} age={age}/>}
             {(gameOver || gameWon) && <GameState 
                 onGameReset={() => resetGame(false, false)} 
                 gameWon={gameWon}

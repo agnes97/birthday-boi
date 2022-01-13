@@ -1,75 +1,121 @@
-section.game-box > .start-screen-container {
+section.game-box > div.start-screen-container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-section.game-box > .start-screen-container > h2 {
+section.game-box > div.start-screen-container > h2 {
     font-size: 3rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    margin: 1.5rem 0;
+    margin: 0;
+    padding: 2.5rem 0;
 }
 
-section.game-box > .start-screen-container > .options-container {
+/* FORM */
+div.start-screen-container > form.form-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
+    gap: 4rem;
+    width: 100%;
+    padding: 0 4rem 2rem 4rem;
+    margin-bottom: 2rem; /* TO AVOID GRASS */
+}
+
+form.form-wrapper > .form-section {
+    display: flex;
+    gap: 2rem;
+    color: hsl(224, 50%, 45%);
+    font-weight: bold;
+}
+
+form.form-wrapper > .form-section.hero {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+form.form-wrapper > .form-section.hero > div.fieldset-option {
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
-    margin-bottom: 4rem;
 }
 
-section.game-box > .start-screen-container > .options-container > .option {
-    padding: 1.5rem;
+/* HERO */
+form.form-wrapper > .form-section.hero,
+form.form-wrapper > .form-section.obstacles {
     border: 0.1rem dashed hsl(224, 50%, 45%);
     height: 100%;
-    display: flex;
-    flex-direction: row;
+    width: 100%;
+}
+
+/* OBSTACLES */
+form.form-wrapper > .form-section.obstacles {
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    list-style: none;
 }
 
-section.game-box > .start-screen-container > .options-container > .option > hr {
-    border: none;
-    width: 0.1rem;
-    height: 100%;
+form.form-wrapper > .form-section.obstacles * label {
+    margin-left: 1rem;
+}
+
+form.form-wrapper > .form-section.obstacles > div.fieldset-option {
+    padding: 1.5rem;
+    margin: -1rem;
+    width: 100%;
+}
+
+form.form-wrapper > .form-section.obstacles > div.fieldset-option:hover,
+form.form-wrapper > .form-section.hero > div.fieldset-option:hover {
     background-color: hsl(224, 50%, 45%);
-}
-
-section.game-box > .start-screen-container > .options-container > .option > img {
-    padding: 1rem;
+    color: hsl(0, 0%, 100%);
     cursor: pointer;
-} 
+}
 
-section.game-box > .start-screen-container > .options-container > .option > img:hover {
-    background-color: hsl(224, 50%, 45%);
+/* SUBMIT */
+form.form-wrapper > .form-section.submit {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }
 
 /* TODO: Create re-usable button component with optional animation! */
-section.game-box > .start-screen-container * button {
+form.form-wrapper > .form-section.submit > input#submit {
     border: 0.1rem solid hsl(0, 0%, 100%);
     color: hsl(0, 0%, 100%);
-    padding: 0.5rem;
+    padding: 1rem;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     border-radius: 50%;
-    min-width: 3rem;
+    min-width: 5.5rem;
     aspect-ratio: 1 / 1;
     transition: transform 1s linear;
     background-color: hsl(224, 50%, 45%);
     line-height: 0;
+    cursor: pointer;
 }
 
-
-section.game-box > .start-screen-container * button:hover {
+form.form-wrapper > .form-section.submit > input#submit:hover {
     background-color: white;
     border: 0.1rem solid hsl(0, 0%, 0%);
     color: hsl(0, 0%, 0%);
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
+}
+
+form.form-wrapper > .form-section.submit > label {
+   color: hsl(224, 50%, 45%);
+   font-weight: bold;
+   font-size: 2.5rem;
+   cursor: pointer;
 }
