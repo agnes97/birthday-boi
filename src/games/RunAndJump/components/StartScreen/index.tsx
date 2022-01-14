@@ -1,9 +1,9 @@
 import { Dispatch, FC, useCallback } from 'react'
 import './index.css'
-import Agnes from '../../../../assets/agnes.gif'
-import Henry from '../../../../assets/henry.gif'
+
 import { GameData } from '../..'
 import { getAge, hisBirthday } from '../../../../services/birthday'
+import { heroes, possibleObstacleNumbers } from '../../data'
 
 type Props = {
     startGame: () => void,
@@ -15,13 +15,29 @@ const title = '{ RUN & JUMP }'
 
 const currentHenrysAge = () => getAge(hisBirthday)
 
-const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {      
+const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
     const submitForm = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        // TODO: Delete console.log when done!
         console.log(gameData)
 
         startGame()
     }, [gameData, startGame])
+
+    const chooseDisplayedTitle = (number: number) => {
+        if (number === 1) return `${number} {for testing}`
+        if (number === currentHenrysAge()) return `HENRY'S AGE {${number}}`
+        return number
+    }
+
+    const handleHeroClick = useCallback((hero: string) => {
+        setGameData({ hero: hero })
+    }, [setGameData])
+
+    const handleObstaclesNumberClick = useCallback((number: number) => {
+        setGameData({ numberOfObstacles: number })
+    }, [setGameData])
 
     return (
         <div className='start-screen-container'>
@@ -31,27 +47,22 @@ const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
                 <fieldset className='form-section hero'>
                     <legend>CHOOSE YOUR HERO</legend>
 
-                    <div className={`fieldset-option ${gameData.hero === 'henry' && 'imitate-hover'}`}>
-                        <img src={Henry} alt='Henry' />
-                        <input 
-                            defaultChecked 
-                            type='radio' 
-                            id='henry' 
-                            name='chosen-hero'
-                            onChange={() => setGameData({ hero: 'henry' })} />
-                        <label htmlFor='henry'>HENRY</label>
-                    </div>
-
-                    <div className={`fieldset-option ${gameData.hero === 'agnes' && 'imitate-hover'}`}>
-                        <img src={Agnes} alt='Agnes' />
-                        <input 
-                            type='radio' 
-                            id='agnes' 
-                            name='chosen-hero'
-                            onChange={() => setGameData({ hero: "agnes" })}
-                        />
-                        <label htmlFor='agnes'>AGNES</label>
-                    </div>
+                    {heroes.map((hero) => (
+                        <div 
+                            key={hero.name} 
+                            className={`fieldset-option ${gameData.hero === hero.name && 'imitate-hover'}`}
+                            onClick={() => handleHeroClick(hero.name)}
+                        >
+                            <img src={hero.imageSrc} alt={hero.imageTitle} />
+                            <input
+                                type='radio' 
+                                id={hero.name} 
+                                name='chosen-hero'
+                                checked={gameData.hero === hero.name}
+                                onChange={() => handleHeroClick(hero.name)} />
+                            <label htmlFor={hero.name}>{hero.name}</label>
+                        </div>
+                    ))}
                 </fieldset>
 
                 {/* START A GAME */}
@@ -64,48 +75,25 @@ const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
                 <fieldset className='form-section obstacles'>
                     <legend>CHOOSE NUMBER OF OBSTACLES</legend>
 
-                    {/* TODO: Refactor this! Variables, Enum? */}
-                    <div className={`fieldset-option ${gameData.numberOfObstacles === 1 && 'imitate-hover'}`}>
-                        <input 
-                            type='radio' 
-                            id='testing' 
-                            name='number-of-obstacles'
-                            onChange={() => setGameData({ numberOfObstacles: 1 })}
-                        />
-                        <label htmlFor='testing'>{`1 {for testing}`}</label>
-                    </div>
-
-                    <div className={`fieldset-option ${gameData.numberOfObstacles === 10 && 'imitate-hover'}`}>
-                        <input 
-                            type='radio' 
-                            id='ten' 
-                            name='number-of-obstacles' 
-                            onChange={() => setGameData({ numberOfObstacles: 10 })}
-                        />
-                        <label htmlFor='ten'>10</label>
-                    </div>
-
-                    <div className={`fieldset-option ${gameData.numberOfObstacles === 100 && 'imitate-hover'}`}>
-                        <input 
-                            type='radio' 
-                            id='hundredth' 
-                            name='number-of-obstacles'
-                            onChange={() => setGameData({ numberOfObstacles: 100 })}
-                        />
-                        <label htmlFor='hundredth'>100</label>
-                    </div>
-
-                    <div className={`fieldset-option ${gameData.numberOfObstacles === currentHenrysAge() && 'imitate-hover'}`}>
-                        <input defaultChecked 
-                            type='radio' 
-                            id='age'
-                            name='number-of-obstacles'
-                            onChange={() => setGameData({ numberOfObstacles: currentHenrysAge() })}
-                        />
-                        <label htmlFor='age'>
-                            {`HENRY'S AGE {${currentHenrysAge()}}`}
-                        </label>
-                    </div>
+                    {/* TODO: BUG! When 1 is chosen, it rewrites any other value chosen after it. */}
+                    {possibleObstacleNumbers.map((number) => (
+                        <div 
+                            key={number.value} 
+                            className={`fieldset-option ${gameData.numberOfObstacles === number.value && 'imitate-hover'}`}
+                            onClick={() => handleObstaclesNumberClick(number.value)}
+                        >
+                            <input
+                                type='radio' 
+                                id={number.title} 
+                                name='number-of-obstacles'
+                                checked={gameData.numberOfObstacles === number.value}
+                                onChange={() => handleObstaclesNumberClick(number.value)}
+                            />
+                            <label htmlFor={number.title}>
+                                {chooseDisplayedTitle(number.value)}
+                            </label>
+                        </div>
+                    ))}
 
                     {/* TODO: Display number of obstacles on game over screen :) */}
                     <div className='fieldset-option'>

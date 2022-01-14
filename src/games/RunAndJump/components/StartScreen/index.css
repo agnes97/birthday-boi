@@ -37,6 +37,10 @@ form.form-wrapper > .form-section.hero {
     align-items: center;
 }
 
+form.form-wrapper > .form-section.hero * label {
+    text-transform: uppercase;
+}
+
 form.form-wrapper > .form-section.hero > div.fieldset-option {
     padding: 1rem;
     width: 100%;

@@ -21,7 +21,6 @@ const RunAndJump: FC = () => {
     
     const heroRef = useRef<HTMLDivElement>(null)
     
-    // TODO: Remember last game as an initial state!
     const initialGameState = { hero: 'henry', numberOfObstacles: initialNumberOfObstacles() }
     const [gameData, setGameData] = useReducer(
         (state: GameData, updates: GameData) => ({
@@ -64,7 +63,7 @@ const RunAndJump: FC = () => {
                 arrivalDelay={3000} 
             />
             <Obstacles
-                // TODO: After implementing gameData, winning takes longer time!
+                // TODO: BUG! After implementing gameData, winning takes longer time!
                 numberOfObstacles={gameData.numberOfObstacles ?? 0}
                 paused={gameOver || !gameRunning}
                 startDelay={1800}
