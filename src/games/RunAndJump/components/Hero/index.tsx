@@ -57,8 +57,9 @@ const Hero: FC<Props> = ({ heroRef, isPresent, arrivalDelay, hero }) => {
     }, [heroRef, isJumping])
 
     const controlHero = useCallback((event) => {
+        if (!isPresent) return // To stop jumping after Game is over
         if (event.code === 'Space') jump()
-    }, [jump])
+    }, [isPresent, jump])
 
     useEffect(() => {
         if (isPresent) moveToStarterPosition()
