@@ -99,30 +99,6 @@ form.form-wrapper > .form-section.submit {
     gap: 2rem;
 }
 
-/* TODO: Create re-usable button component with optional animation! */
-form.form-wrapper > .form-section.submit > input#submit {
-    border: 0.1rem solid hsl(0, 0%, 100%);
-    color: hsl(0, 0%, 100%);
-    padding: 1rem;
-    font-weight: bold;
-    font-size: 2.5rem;
-    border-radius: 50%;
-    min-width: 5.5rem;
-    aspect-ratio: 1 / 1;
-    transition: transform 1s linear;
-    background-color: hsl(224, 50%, 45%);
-    line-height: 0;
-    cursor: pointer;
-}
-
-form.form-wrapper > .form-section.submit > input#submit:hover {
-    background-color: white;
-    border: 0.1rem solid hsl(0, 0%, 0%);
-    color: hsl(0, 0%, 0%);
-    transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-}
-
 form.form-wrapper > .form-section.submit > label {
    color: hsl(224, 50%, 45%);
    font-weight: bold;

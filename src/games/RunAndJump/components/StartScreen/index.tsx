@@ -4,6 +4,7 @@ import './index.css'
 import { GameData } from '../..'
 import { getAge, hisBirthday } from '../../../../services/birthday'
 import { heroes, possibleObstacleNumbers } from '../../data'
+import Button, { buttonIcons } from '../../../../components/Button'
 
 type Props = {
     startGame: () => void,
@@ -64,7 +65,13 @@ const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
 
                 {/* START A GAME */}
                 <div className='form-section submit'>
-                    <input id='submit' type='submit' value='&#x27A4;' title='PLAY GAME!' />
+                    <Button 
+                        buttonId='submit' 
+                        buttonIcon={buttonIcons.play} 
+                        buttonTitle='PLAY GAME!'
+                        buttonSize={'big'} 
+                        buttonShape={'round'} 
+                        colorscheme='default' />
                     <label htmlFor='submit'>PLAY</label>
                 </div>
 
