@@ -63,7 +63,6 @@ const RunAndJump: FC = () => {
                 arrivalDelay={3000} 
             />
             <Obstacles
-                // TODO: BUG! After implementing gameData, winning takes longer time!
                 numberOfObstacles={gameData.numberOfObstacles ?? 0}
                 paused={gameOver || !gameRunning}
                 startDelay={1800}

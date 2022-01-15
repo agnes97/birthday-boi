@@ -17,18 +17,15 @@ const currentHenrysAge = () => getAge(hisBirthday)
 
 const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
     const submitForm = useCallback((event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        // TODO: Delete console.log when done!
-        console.log(gameData)
+        event.preventDefault()
 
         startGame()
-    }, [gameData, startGame])
+    }, [startGame])
 
-    const chooseDisplayedTitle = (number: number) => {
+    const chooseDisplayedTitle = (number: number): string => {
         if (number === 1) return `${number} {for testing}`
         if (number === currentHenrysAge()) return `HENRY'S AGE {${number}}`
-        return number
+        return number.toString()
     }
 
     const handleHeroClick = useCallback((hero: string) => {
@@ -75,7 +72,6 @@ const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
                 <fieldset className='form-section obstacles'>
                     <legend>CHOOSE NUMBER OF OBSTACLES</legend>
 
-                    {/* TODO: BUG! When 1 is chosen, it rewrites any other value chosen after it. */}
                     {possibleObstacleNumbers.map((number) => (
                         <div 
                             key={number.value} 

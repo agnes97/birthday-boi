@@ -22,10 +22,12 @@ type Props = {
 const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObstacleInCollision, onObstacleCollision, startDelay }) => {
     const obstacleRefs = useRef<Array<HTMLDivElement | null>>([])
 
+    useEffect(() => { obstacleRefs.current = [] }, [numberOfObstacles])
+
     const nextObstacleTimeoutRef = useRef<number>()
     const animationRequestRef = useRef<number>()
 
-    const resetObstacles = useCallback(() => {
+    const resetObstacles = useCallback(() => {        
         clearTimeout(nextObstacleTimeoutRef.current)
 
         const animationRequest = animationRequestRef.current
@@ -41,7 +43,7 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObs
 
     useEffect(() => {
         if (paused) resetObstacles()
-    }, [paused, resetObstacles])
+    }, [paused, resetObstacles, numberOfObstacles])
 
     const moveNextObstacle = useCallback((obstaclesIterator: IterableIterator<HTMLDivElement | null>) => {
         const nextObstacle = obstaclesIterator.next()
@@ -62,7 +64,6 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObs
 
     useEffect(() => {
         if (!paused) {
-            // TODO: Add counting (3, 2, 1) before start in the background!
             const startObstacleMovement = () => moveNextObstacle(obstacleRefs.current.values())
             startDelay ? setTimeout(startObstacleMovement, startDelay) : startObstacleMovement()
         }
@@ -96,11 +97,11 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObs
 
     return (
         <>
-            {obstacles.map((obstacle) => 
+            {obstacles.map((obstacle, obstacleIndex) => 
                 <div 
                     className='obstacle'
                     key={obstacle}
-                    ref={(obstacleRef) => obstacleRefs.current.push(obstacleRef)}
+                    ref={(obstacleRef) => obstacleRefs.current[obstacleIndex] = obstacleRef}
                 >
                     <div className='obstacle-flame' />
                     <div className='obstacle-number'>{obstacle}</div>
