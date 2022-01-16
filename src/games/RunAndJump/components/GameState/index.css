@@ -16,8 +16,11 @@ section.game-box > .game-state-container.game-won {
 
 section.game-box > .game-state-container > h2 {
     font-size: 3rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    margin: 0;
+}
+
+section.game-box > .game-state-container > h3 {
+    margin-top: 0.5rem;
 }
 
 section.game-box > .game-state-container > .button-container {

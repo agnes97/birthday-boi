@@ -98,7 +98,6 @@ const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
                         </div>
                     ))}
 
-                    {/* TODO: Display number of obstacles on game over screen :) */}
                     <div className='fieldset-option'>
                         <input type='radio' disabled title='Currently not available!' id='unlimited' name='number-of-obstacles' />
                         <label htmlFor='unlimited'><s>UNLIMITED</s></label>

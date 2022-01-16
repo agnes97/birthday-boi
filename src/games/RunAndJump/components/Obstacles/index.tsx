@@ -15,7 +15,7 @@ type Props = {
     paused: boolean,
     onLastObstacle: () => void,
     isObstacleInCollision?: (obstacleBoundaries: DOMRect) => boolean,
-    onObstacleCollision?: () => void,
+    onObstacleCollision?: (collisionObstacle: number) => void,
     startDelay?: number, // milliseconds
 }
 
@@ -74,14 +74,16 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObs
 
         const obstacles = obstacleRefs.current
 
-        const isCollision = obstacles.some(obstacle => {
+        const collisionObstacleIndex = obstacles.findIndex(obstacle => {
             if (obstacle === null) return false
 
             const obstacleBoundaries = obstacle.getBoundingClientRect()
             return isObstacleInCollision(obstacleBoundaries)
         })
 
-        if (onObstacleCollision && isCollision) return onObstacleCollision()
+        const isCollision = collisionObstacleIndex !== -1
+
+        if (onObstacleCollision && isCollision) return onObstacleCollision(collisionObstacleIndex)
 
         animationRequestRef.current = requestAnimationFrame(detectCollision)
     }, [isObstacleInCollision, onObstacleCollision])

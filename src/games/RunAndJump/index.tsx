@@ -18,6 +18,7 @@ const RunAndJump: FC = () => {
     const [gameRunning, setGameRunning] = useState<boolean>(false)
     const [gameOver, setGameOver] = useState<boolean>(false)
     const [gameWon, setGameWon] = useState<boolean>(false)
+    const [lastSuccessfulObstacle, setlastSuccessfulObstacle] = useState<number>(0)
     
     const heroRef = useRef<HTMLDivElement>(null)
     
@@ -49,12 +50,14 @@ const RunAndJump: FC = () => {
             {(!gameRunning && !gameOver) && <StartScreen 
                 startGame={() => startGame()}
                 gameData={gameData}
-                setGameData={setGameData}           
+                // TODO: Set gameData here (onGameStart callback prop)
+                setGameData={setGameData}          
             />}
             {(gameOver || gameWon) && <GameState 
                 onGameReset={() => resetGame(false, false)} 
                 gameWon={gameWon}
                 returnToMenu={() => returnToMenu()}
+                gameScore={gameWon ? gameData.numberOfObstacles : lastSuccessfulObstacle}
             />}
             <Hero 
                 heroRef={heroRef} 
@@ -71,7 +74,11 @@ const RunAndJump: FC = () => {
                     const heroBoundaries = heroRef.current?.getBoundingClientRect()
                     return heroBoundaries ? areBoundariesInCollision(heroBoundaries, obstacleBoundaries, 5) : false
                 }}
-                onObstacleCollision={() => setGameOver(true)} />
+                onObstacleCollision={(collisionObstacle) => setGameOver(() => {
+                    setlastSuccessfulObstacle(collisionObstacle)
+                    return true
+                }) 
+                } />
             <div className={`grass ${(gameOver && !gameWon) && 'game-over'} ${!gameRunning && 'start-screen'}`} />
         </section>
     )

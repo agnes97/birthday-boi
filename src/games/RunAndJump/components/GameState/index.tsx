@@ -8,12 +8,14 @@ const gameWonTitle = "{ CONGRATULATIONS! }"
 type Props = {
     onGameReset: () => void,
     returnToMenu: () => void,
-    gameWon: boolean
+    gameWon: boolean,
+    gameScore?: number
 }
 
-const GameState: FC<Props> = ({ onGameReset, returnToMenu, gameWon }) => (
+const GameState: FC<Props> = ({ onGameReset, returnToMenu, gameWon, gameScore }) => (
     <div className={`game-state-container ${gameWon ? 'game-won' : 'game-lost'}`}>
         <h2>{gameWon ? gameWonTitle : gameOverTitle}</h2>
+        {!isNaN(Number(gameScore)) && <h3>{gameScore} SUCCESSFUL JUMPS</h3>}
         <div className='button-container'>
             <Button
                 onClick={() => onGameReset()}
