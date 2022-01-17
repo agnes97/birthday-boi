@@ -38,11 +38,11 @@ export const possibleObstacleNumbers: PossibleObstacleNumbers = [
         title: 'ten',
     },
     {
-        value: 100,
-        title: 'hundredth',
-    },
-    {
         value: currentHenrysAge(),
         title: 'age',
+    },
+    {
+        value: 100,
+        title: 'hundredth',
     }
 ]

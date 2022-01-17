@@ -105,3 +105,49 @@ form.form-wrapper > .form-section.submit > label {
    font-size: 2.5rem;
    cursor: pointer;
 }
+
+.custom-number-container {
+    font-size: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.custom-number-container > input {
+    height: 2.5rem;
+    width: 5rem;
+    font-size: 1.7rem;
+    padding: 0.5rem;
+    color: hsl(0, 0%, 100%);
+    background-color: hsla(0, 0%, 100%, 0.1);
+    border: 0.1rem dashed hsl(0, 0%, 100%);
+}
+
+/* Do not group these rules! */
+.custom-number-container > input::-webkit-input-placeholder {
+    color: hsl(0, 0%, 100%);
+}
+.custom-number-container > input:-moz-placeholder {
+    /* FF 4-18 */
+    color: hsl(0, 0%, 100%);
+    opacity: 1;
+}
+.custom-number-container > input::-moz-placeholder {
+    /* FF 19+ */
+    color: hsl(0, 0%, 100%);
+    opacity: 1;
+}
+.custom-number-container > input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: hsl(0, 0%, 100%);
+}
+.custom-number-container > input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: hsl(0, 0%, 100%);
+}
+.custom-number-container > input::placeholder {
+    /* modern browser */
+    color: hsl(0, 0%, 100%);
+}

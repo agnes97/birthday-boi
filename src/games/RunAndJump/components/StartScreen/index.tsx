@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react'
+import { FC, useCallback, useState } from 'react'
 import './index.css'
 
 import { GameData } from '../..'
@@ -17,6 +17,8 @@ const title = '{ RUN & JUMP }'
 const currentHenrysAge = () => getAge(hisBirthday)
 
 const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
+    const [customNumber, setCustomNumber] = useState<number>(0)
+
     const submitForm = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
@@ -98,9 +100,33 @@ const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
                         </div>
                     ))}
 
+                    {/* UNLIMITED NUMBERS */}
                     <div className='fieldset-option'>
                         <input type='radio' disabled title='Currently not available!' id='unlimited' name='number-of-obstacles' />
                         <label htmlFor='unlimited'><s>UNLIMITED</s></label>
+                    </div>
+
+                    {/* CUSTOM NUMBER */}
+                    <div
+                        className={`fieldset-option custom-number-container ${gameData.numberOfObstacles === customNumber && 'imitate-hover'}`}
+                        onClick={() => customNumber > 0 && handleObstaclesNumberClick(customNumber)}
+                    >
+                        <label htmlFor='custom-number'>CUSTOM<br/>NUMBER</label>
+                        <input
+                            type='number' 
+                            min='0'
+                            step='1'
+                            id='custom-number'
+                            name='number-of-obstacles'
+                            placeholder={customNumber.toString()}
+                            checked={gameData.numberOfObstacles === customNumber}
+                            onChange={(e) => {
+                                const newCustomNumber = Number(e.target.value)
+
+                                setCustomNumber(newCustomNumber)
+                                newCustomNumber > 0 && handleObstaclesNumberClick(newCustomNumber)
+                            }}
+                        />
                     </div>
                 </fieldset>
             </form>

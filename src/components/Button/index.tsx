@@ -16,6 +16,7 @@ type ButtonIcons = {
 }
 
 export const buttonIcons: ButtonIcons = {
+    approve: '\u2713',
     menu: '\u2261',
     play: '\u27A4',
     replay: '\u21BB',
