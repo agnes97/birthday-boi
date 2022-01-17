@@ -8,8 +8,8 @@ import StartScreen from './components/StartScreen'
 import { getAge, hisBirthday } from '../../services/birthday'
 
 export type GameData = {
-    hero?: string,
-    numberOfObstacles?: number
+    hero: string,
+    numberOfObstacles: number
 }
 
 const initialNumberOfObstacles = () => getAge(hisBirthday)
@@ -24,7 +24,7 @@ const RunAndJump: FC = () => {
     
     const initialGameState = { hero: 'henry', numberOfObstacles: initialNumberOfObstacles() }
     const [gameData, setGameData] = useReducer(
-        (state: GameData, updates: GameData) => ({
+        (state: GameData, updates: Partial<GameData>) => ({
           ...state,
           ...updates,
         }),
@@ -50,8 +50,7 @@ const RunAndJump: FC = () => {
             {(!gameRunning && !gameOver) && <StartScreen 
                 startGame={() => startGame()}
                 gameData={gameData}
-                // TODO: Set gameData here (onGameStart callback prop)
-                setGameData={setGameData}          
+                onGameDataChange={(newGameData) => setGameData(newGameData)}          
             />}
             {(gameOver || gameWon) && <GameState 
                 onGameReset={() => resetGame(false, false)} 

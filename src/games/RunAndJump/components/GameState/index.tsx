@@ -12,27 +12,31 @@ type Props = {
     gameScore?: number
 }
 
-const GameState: FC<Props> = ({ onGameReset, returnToMenu, gameWon, gameScore }) => (
-    <div className={`game-state-container ${gameWon ? 'game-won' : 'game-lost'}`}>
-        <h2>{gameWon ? gameWonTitle : gameOverTitle}</h2>
-        {!isNaN(Number(gameScore)) && <h3>{gameScore} SUCCESSFUL JUMPS</h3>}
-        <div className='button-container'>
-            <Button
-                onClick={() => onGameReset()}
-                buttonTitle='REPLAY GAME'
-                buttonSize={'medium'}
-                buttonShape={'round'}
-                buttonIcon={buttonIcons.replay}
-                colorscheme={gameWon ? 'won' : 'lost'} />
-            <Button
-                onClick={() => returnToMenu()}
-                buttonTitle='BACK TO MENU'
-                buttonSize={'medium'}
-                buttonShape={'round'}
-                buttonIcon={buttonIcons.menu}
-                colorscheme={gameWon ? 'won' : 'lost'} />
+const GameState: FC<Props> = ({ onGameReset, returnToMenu, gameWon, gameScore }) => {
+    const gameScoreText = gameScore === 1 ? 'SUCCESSFUL JUMP' : 'SUCCESSFUL JUMPS'
+
+    return (
+        <div className={`game-state-container ${gameWon ? 'game-won' : 'game-lost'}`}>
+            <h2>{gameWon ? gameWonTitle : gameOverTitle}</h2>
+            {!isNaN(Number(gameScore)) && <h3>{gameScore} {gameScoreText}</h3>}
+            <div className='button-container'>
+                <Button
+                    onClick={() => onGameReset()}
+                    buttonTitle='REPLAY GAME'
+                    buttonSize={'medium'}
+                    buttonShape={'round'}
+                    buttonIcon={buttonIcons.replay}
+                    colorscheme={gameWon ? 'won' : 'lost'} />
+                <Button
+                    onClick={() => returnToMenu()}
+                    buttonTitle='BACK TO MENU'
+                    buttonSize={'medium'}
+                    buttonShape={'round'}
+                    buttonIcon={buttonIcons.menu}
+                    colorscheme={gameWon ? 'won' : 'lost'} />
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default GameState

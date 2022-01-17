@@ -1,4 +1,4 @@
-import { Dispatch, FC, useCallback } from 'react'
+import { FC, useCallback } from 'react'
 import './index.css'
 
 import { GameData } from '../..'
@@ -9,14 +9,14 @@ import Button, { buttonIcons } from '../../../../components/Button'
 type Props = {
     startGame: () => void,
     gameData: GameData,
-    setGameData: Dispatch<GameData>
+    onGameDataChange: (newGameData: Partial<GameData>) => void
 }
 
 const title = '{ RUN & JUMP }'
 
 const currentHenrysAge = () => getAge(hisBirthday)
 
-const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
+const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
     const submitForm = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
@@ -30,12 +30,12 @@ const StartScreen: FC<Props> = ({ startGame, gameData, setGameData }) => {
     }
 
     const handleHeroClick = useCallback((hero: string) => {
-        setGameData({ hero: hero })
-    }, [setGameData])
+        onGameDataChange({ hero })
+    }, [onGameDataChange])
 
-    const handleObstaclesNumberClick = useCallback((number: number) => {
-        setGameData({ numberOfObstacles: number })
-    }, [setGameData])
+    const handleObstaclesNumberClick = useCallback((numberOfObstacles: number) => {
+        onGameDataChange({ numberOfObstacles })
+    }, [onGameDataChange])
 
     return (
         <div className='start-screen-container'>
