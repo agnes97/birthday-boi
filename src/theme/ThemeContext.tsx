@@ -1,7 +1,7 @@
 import { FC, createContext, useReducer } from 'react'
 
 type Props = {
-  children: JSX.Element,
+  children: any,
 }
 
 type Theme = {

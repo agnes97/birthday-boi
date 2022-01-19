@@ -1,18 +1,18 @@
 import { FC } from 'react';
 
-import './index.css';
 import Footer from '../Footer';
 import Header from '../Header';
 import RunAndJump from '../../games/RunAndJump';
+import { StyledPageWrapper, StyledMain } from './styled';
 
 const App: FC = () => (
-  <div className="page-wrapper">
+  <StyledPageWrapper>
     <Header />
-    <main>
+    <StyledMain>
       <RunAndJump />
-    </main>
+    </StyledMain>
     <Footer />
-  </div>
+  </StyledPageWrapper>
 )
 
 export default App;

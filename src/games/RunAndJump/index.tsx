@@ -3,10 +3,10 @@ import { areBoundariesInCollision } from '../../services/collision'
 import GameState from './components/GameState'
 import Obstacles from './components/Obstacles'
 import Hero from './components/Hero'
-import './index.css'
 import StartScreen from './components/StartScreen'
 import { getAge, hisBirthday } from '../../services/birthday'
 import { ThemeContext } from '../../theme/ThemeContext'
+import { StyledGameBox, StyledGrass } from './styled'
 
 export type GameData = {
     hero: string,
@@ -41,7 +41,7 @@ const RunAndJump: FC = () => {
     const resetGame = useCallback((gameOverValue: boolean, gameWonValue: boolean) => {
         setGameOver(gameOverValue)
         setGameWon(gameWonValue)
-        theme.updateCurrentTheme('DEFAULT_MODE')
+        !theme.currentTheme.defaultMode && theme.updateCurrentTheme('DEFAULT_MODE')
     }, [theme])
 
     const returnToMenu = useCallback(() => {
@@ -50,7 +50,7 @@ const RunAndJump: FC = () => {
     }, [resetGame])
 
     return (
-        <section className='game-box'>
+        <StyledGameBox>
             {(!gameRunning && !gameOver) && <StartScreen 
                 startGame={() => startGame()}
                 gameData={gameData}
@@ -87,8 +87,8 @@ const RunAndJump: FC = () => {
                     }) 
                     theme.updateCurrentTheme('LOST_MODE')
                 }} />
-            <div className={`grass ${(gameOver && !gameWon) && 'game-over'} ${!gameRunning && 'start-screen'}`} />
-        </section>
+            <StyledGrass className={`${(gameOver && !gameWon) && 'game-over'} ${!gameRunning && 'start-screen'}`} />
+        </StyledGameBox>
     )
 }
 

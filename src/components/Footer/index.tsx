@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import './index.css'
+import { StyledFooter } from './styled'
 
 const Footer: FC = () => (
-    <footer>
+    <StyledFooter>
         <small>&#169; 2021 Jana Chaloupková</small>
-    </footer>
+    </StyledFooter>
 )
 
 export default Footer

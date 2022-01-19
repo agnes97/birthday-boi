@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { getAge, hisBirthday } from '../../services/birthday'
-import './index.css'
+import { StyledHeader } from './styled'
 
 const Header: FC = () => (
-    <header className="main-header">
+    <StyledHeader>
         <h1>Birthday Boi</h1>
         <h2>{getAge(hisBirthday)}<sup>th</sup> edition</h2>
-    </header>
+    </StyledHeader>
 )
 
 export default Header

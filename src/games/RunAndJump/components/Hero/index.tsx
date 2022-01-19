@@ -1,5 +1,5 @@
 import { FC, RefObject, useCallback, useEffect, useState } from 'react'
-import './index.css'
+import { StyledHero } from './styled'
 
 const jumpAnimationTime = 300 // milliseconds
 const jumpAnimationType = 'ease'
@@ -69,7 +69,7 @@ const Hero: FC<Props> = ({ heroRef, isPresent, arrivalDelay, hero }) => {
         return () => document.removeEventListener('keydown', controlHero)
     }, [controlHero, leave, isPresent, moveToStarterPosition])
 
-    return <div ref={heroRef} className={`hero ${hero}`} />
+    return <StyledHero ref={heroRef} className={hero} />
 }
 
 export default Hero

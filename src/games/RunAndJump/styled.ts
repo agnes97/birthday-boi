@@ -1,4 +1,6 @@
-section.game-box {
+import styled from 'styled-components'
+
+export const StyledGameBox = styled.section`
     position: relative;
     display: flex;
     width: 100%;
@@ -8,20 +10,15 @@ section.game-box {
     background-color: hsl(225, 80%, 78%);
     outline: 0.2rem solid white;
     flex-grow: 1;
-}
+`
 
-section.game-box > .grass {
+export const StyledGrass = styled.div`
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 2rem;
     background-color: hsl(120, 50%, 45%);
-}
 
-section.game-box > .grass.game-over {
-    background-color: hsl(0, 50%, 45%);
-}
-
-section.game-box > .grass.start-screen {
-    background-color: hsl(224, 50%, 45%);
-}
+    &.game-over { background-color: hsl(0, 50%, 45%); }
+    &.start-screen { background-color: hsl(224, 50%, 45%); }
+`

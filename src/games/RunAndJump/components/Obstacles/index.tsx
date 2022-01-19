@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react'
-import './index.css'
+import { StyledObstacle } from './styled'
 
 const obstaclesMovingTime = 3000 // milliseconds
 const obstaclesAnimationType = 'linear'
@@ -100,14 +100,13 @@ const Obstacles: FC<Props> = ({ numberOfObstacles, paused, onLastObstacle, isObs
     return (
         <>
             {obstacles.map((obstacle, obstacleIndex) => 
-                <div 
-                    className='obstacle'
+                <StyledObstacle
                     key={obstacle}
                     ref={(obstacleRef) => obstacleRefs.current[obstacleIndex] = obstacleRef}
                 >
                     <div className='obstacle-flame' />
                     <div className='obstacle-number'>{obstacle}</div>
-                </div>
+                </StyledObstacle>
             )}
         </>
     )

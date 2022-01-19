@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import './index.css'
+import { StyledButton } from './styled'
 
 type Props = {
     buttonSize: 'small' | 'medium' | 'big',
@@ -23,14 +23,14 @@ export const buttonIcons: ButtonIcons = {
 }
 
 const Button: FC<Props> = ({ buttonId, buttonSize, buttonShape, buttonIcon, buttonTitle, colorscheme, onClick }) => (
-    <button 
+    <StyledButton 
         id={buttonId}
         className={`button ${buttonSize} ${buttonShape} ${colorscheme}`} 
         onClick={onClick} 
         title={buttonTitle}
     >
         {buttonIcon ?? buttonIcon}
-    </button>
+    </StyledButton>
 )
 
 export default Button

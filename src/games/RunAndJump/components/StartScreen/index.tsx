@@ -1,10 +1,10 @@
 import { FC, useCallback, useState } from 'react'
-import './index.css'
 
 import { GameData } from '../..'
 import { getAge, hisBirthday } from '../../../../services/birthday'
 import { heroes, possibleObstacleNumbers } from '../../data'
 import Button, { buttonIcons } from '../../../../components/Button'
+import { CustomNumberContainer, StyledFieldset, StyledForm, StyledStartScreenContainer, StyledSubmit } from './styled'
 
 type Props = {
     startGame: () => void,
@@ -40,11 +40,11 @@ const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
     }, [onGameDataChange])
 
     return (
-        <div className='start-screen-container'>
+        <StyledStartScreenContainer>
             <h2>{title}</h2>
-            <form className='form-wrapper' onSubmit={submitForm}>
+            <StyledForm onSubmit={submitForm}>
                 {/* CHOOSE A HERO */}
-                <fieldset className='form-section hero'>
+                <StyledFieldset className='hero'>
                     <legend>CHOOSE YOUR HERO</legend>
 
                     {heroes.map((hero) => (
@@ -63,10 +63,10 @@ const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
                             <label htmlFor={hero.name}>{hero.name}</label>
                         </div>
                     ))}
-                </fieldset>
+                </StyledFieldset>
 
                 {/* START A GAME */}
-                <div className='form-section submit'>
+                <StyledSubmit>
                     <Button 
                         buttonId='submit' 
                         buttonIcon={buttonIcons.play} 
@@ -75,10 +75,10 @@ const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
                         buttonShape={'round'} 
                         colorscheme='default' />
                     <label htmlFor='submit'>PLAY</label>
-                </div>
+                </StyledSubmit>
 
                 {/* CHOOSE NUMBER OF OBSTACLES */}
-                <fieldset className='form-section obstacles'>
+                <StyledFieldset className='obstacles'>
                     <legend>CHOOSE NUMBER OF OBSTACLES</legend>
 
                     {possibleObstacleNumbers.map((number) => (
@@ -100,15 +100,9 @@ const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
                         </div>
                     ))}
 
-                    {/* UNLIMITED NUMBERS */}
-                    <div className='fieldset-option'>
-                        <input type='radio' disabled title='Currently not available!' id='unlimited' name='number-of-obstacles' />
-                        <label htmlFor='unlimited'><s>UNLIMITED</s></label>
-                    </div>
-
                     {/* CUSTOM NUMBER */}
-                    <div
-                        className={`fieldset-option custom-number-container ${gameData.numberOfObstacles === customNumber && 'imitate-hover'}`}
+                    <CustomNumberContainer
+                        className={`fieldset-option ${gameData.numberOfObstacles === customNumber && 'imitate-hover'}`}
                         onClick={() => customNumber > 0 && handleObstaclesNumberClick(customNumber)}
                     >
                         <label htmlFor='custom-number'>CUSTOM<br/>NUMBER</label>
@@ -127,10 +121,10 @@ const StartScreen: FC<Props> = ({ startGame, gameData, onGameDataChange }) => {
                                 newCustomNumber > 0 && handleObstaclesNumberClick(newCustomNumber)
                             }}
                         />
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+                    </CustomNumberContainer>
+                </StyledFieldset>
+            </StyledForm>
+        </StyledStartScreenContainer>
     )
 }
 
