@@ -1,4 +1,4 @@
-import { FC, useCallback, useReducer, useRef, useState } from 'react'
+import { FC, useCallback, useContext, useReducer, useRef, useState } from 'react'
 import { areBoundariesInCollision } from '../../services/collision'
 import GameState from './components/GameState'
 import Obstacles from './components/Obstacles'
@@ -6,6 +6,7 @@ import Hero from './components/Hero'
 import './index.css'
 import StartScreen from './components/StartScreen'
 import { getAge, hisBirthday } from '../../services/birthday'
+import { ThemeContext } from '../../theme/ThemeContext'
 
 export type GameData = {
     hero: string,
@@ -15,11 +16,13 @@ export type GameData = {
 const initialNumberOfObstacles = () => getAge(hisBirthday)
 
 const RunAndJump: FC = () => {
+    const theme = useContext(ThemeContext)
+
     const [gameRunning, setGameRunning] = useState<boolean>(false)
     const [gameOver, setGameOver] = useState<boolean>(false)
     const [gameWon, setGameWon] = useState<boolean>(false)
     const [lastSuccessfulObstacle, setlastSuccessfulObstacle] = useState<number>(0)
-    
+
     const heroRef = useRef<HTMLDivElement>(null)
     
     const initialGameState = { hero: 'henry', numberOfObstacles: initialNumberOfObstacles() }
@@ -38,7 +41,8 @@ const RunAndJump: FC = () => {
     const resetGame = useCallback((gameOverValue: boolean, gameWonValue: boolean) => {
         setGameOver(gameOverValue)
         setGameWon(gameWonValue)
-    }, [])
+        theme.updateCurrentTheme('DEFAULT_MODE')
+    }, [theme])
 
     const returnToMenu = useCallback(() => {
         setGameRunning(false)
@@ -68,16 +72,21 @@ const RunAndJump: FC = () => {
                 numberOfObstacles={gameData.numberOfObstacles ?? 0}
                 paused={gameOver || !gameRunning}
                 startDelay={1800}
-                onLastObstacle={() => resetGame(true, true)}
+                onLastObstacle={() => {
+                    resetGame(true, true)
+                    theme.updateCurrentTheme('WON_MODE')
+                }}
                 isObstacleInCollision={(obstacleBoundaries) => {
                     const heroBoundaries = heroRef.current?.getBoundingClientRect()
                     return heroBoundaries ? areBoundariesInCollision(heroBoundaries, obstacleBoundaries, 5) : false
                 }}
-                onObstacleCollision={(collisionObstacle) => setGameOver(() => {
-                    setlastSuccessfulObstacle(collisionObstacle)
-                    return true
-                }) 
-                } />
+                onObstacleCollision={(collisionObstacle) => {
+                    setGameOver(() => {
+                        setlastSuccessfulObstacle(collisionObstacle)
+                        return true
+                    }) 
+                    theme.updateCurrentTheme('LOST_MODE')
+                }} />
             <div className={`grass ${(gameOver && !gameWon) && 'game-over'} ${!gameRunning && 'start-screen'}`} />
         </section>
     )
