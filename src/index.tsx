@@ -1,19 +1,32 @@
-import React from 'react';
+/* eslint-disable no-mixed-operators */
+import React, { FC, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from './theme/ThemeContext';
 
 import { createGlobalStyle } from 'styled-components'
+import { ThemeContext, ThemeProvider } from './theme/ThemeContext';
+
+type PropsGlobalVariables = {
+  theme: string,
+}
 
 const GlobalStyle = createGlobalStyle`
   :root {
-      --background-primary-color: hsl(240, 1%, 15%);
-      --background-secondary-color-light: hsl(0, 0%, 32%);
+      --background-primary-color: ${(props: PropsGlobalVariables) => props.theme && 'hsl(240, 1%, 15%)'};
+      --background-secondary-color-light: ${(props: PropsGlobalVariables) => props.theme && 'hsl(0, 0%, 32%)'};
 
       --text-primary-color: hsl(0, 0%, 100%);
-      --text-secondary-color-light: hsl(10, 80%, 50%);
-      --text-secondary-color-dark: hsl(10, 60%, 30%);
+
+      --text-secondary-color-light: ${(props: PropsGlobalVariables) => 
+        (props.theme === 'defaultMode') && 'hsl(225, 80%, 80%)' || 
+        (props.theme === 'wonMode') && 'hsl(160, 30%, 55%)' || 
+        (props.theme === 'lostMode') && 'hsl(10, 80%, 50%)'};
+
+      --text-secondary-color-dark: ${(props: PropsGlobalVariables) => 
+        (props.theme === 'defaultMode') && 'hsl(225, 50%, 45%)' || 
+        (props.theme === 'wonMode') && 'hsl(120, 50%, 45%)' || 
+        (props.theme === 'lostMode') && 'hsl(0, 50%, 45%)'};
   }
 
   html {
@@ -34,10 +47,22 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const getCurrentTheme = (theme: any): string => {
+  if (theme.currentTheme.wonMode === true) return 'wonMode' 
+  if (theme.currentTheme.lostMode === true) return 'lostMode' 
+  return 'defaultMode'
+}
+
+const MyGlobalStyles: FC = () => {
+  const theme = useContext(ThemeContext)
+
+  return <GlobalStyle theme={getCurrentTheme(theme)} />
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
-      <GlobalStyle />
+      <MyGlobalStyles />
       <App />
     </ThemeProvider>
   </React.StrictMode>,

@@ -4,7 +4,7 @@ type Props = {
   children: any,
 }
 
-type Theme = {
+export type Theme = {
   theme: { [index: string]: boolean },
   themeType: 'DEFAULT_MODE' | 'WON_MODE' | 'LOST_MODE',
 }
@@ -34,7 +34,7 @@ export const ThemeProvider: FC<Props> = ({ children }) => {
 
   console.log({currentTheme})
   return (
-    <ThemeContext.Provider 
+    <ThemeContext.Provider
       value={{ currentTheme: currentTheme , updateCurrentTheme: updateCurrentTheme }}>
       {children}
     </ThemeContext.Provider>
